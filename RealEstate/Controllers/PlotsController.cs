@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Plots
         public ActionResult Index()
         {
-            var plots = db.Plots.Include(p => p.Property);
+            var plots = db.Plots;
             return View(plots.ToList());
         }
 

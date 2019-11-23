@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Properties
         public ActionResult Index()
         {
-            var properties = db.Properties.Include(p => p.ApplicationUser).Include(p => p.Plot).Include(p => p.Residential);
+            var properties = db.Properties;
             return View(properties.ToList());
         }
 

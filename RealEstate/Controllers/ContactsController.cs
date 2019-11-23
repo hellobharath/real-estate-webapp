@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Contacts
         public ActionResult Index()
         {
-            var contacts = db.Contacts.Include(c => c.ApplicationUser);
+            var contacts = db.Contacts;
             return View(contacts.ToList());
         }
 

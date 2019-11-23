@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Agreements
         public ActionResult Index()
         {
-            var agreements = db.Agreements.Include(a => a.Payee).Include(a => a.Payer).Include(a => a.Property);
+            var agreements = db.Agreements;
             return View(agreements.ToList());
         }
 

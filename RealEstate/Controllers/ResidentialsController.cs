@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Residentials
         public ActionResult Index()
         {
-            var residentials = db.Residentials.Include(r => r.Property);
+            var residentials = db.Residentials;
             return View(residentials.ToList());
         }
 

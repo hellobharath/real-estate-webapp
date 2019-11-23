@@ -17,7 +17,7 @@ namespace RealEstate.Controllers
         // GET: Ads
         public ActionResult Index()
         {
-            var ads = db.Ads.Include(a => a.ApplicationUser).Include(a => a.Property);
+            var ads = db.Ads;
             return View(ads.ToList());
         }
 
