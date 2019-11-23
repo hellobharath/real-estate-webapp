@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -168,14 +170,39 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdsController.cs" />
+    <Compile Include="Controllers\AgreementsController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlotsController.cs" />
+    <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\ResidentialsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911220754276_v1.cs" />
+    <Compile Include="Migrations\201911220754276_v1.Designer.cs">
+      <DependentUpon>201911220754276_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911220815564_v2.cs" />
+    <Compile Include="Migrations\201911220815564_v2.Designer.cs">
+      <DependentUpon>201911220815564_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911231226099_v3.cs" />
+    <Compile Include="Migrations\201911231226099_v3.Designer.cs">
+      <DependentUpon>201911231226099_v3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Ad.cs" />
+    <Compile Include="Models\Agreement.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Plot.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\Residential.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -235,6 +262,36 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Ads\Create.cshtml" />
+    <Content Include="Views\Ads\Delete.cshtml" />
+    <Content Include="Views\Ads\Details.cshtml" />
+    <Content Include="Views\Ads\Edit.cshtml" />
+    <Content Include="Views\Ads\Index.cshtml" />
+    <Content Include="Views\Properties\Create.cshtml" />
+    <Content Include="Views\Properties\Delete.cshtml" />
+    <Content Include="Views\Properties\Details.cshtml" />
+    <Content Include="Views\Properties\Edit.cshtml" />
+    <Content Include="Views\Properties\Index.cshtml" />
+    <Content Include="Views\Residentials\Create.cshtml" />
+    <Content Include="Views\Residentials\Delete.cshtml" />
+    <Content Include="Views\Residentials\Details.cshtml" />
+    <Content Include="Views\Residentials\Edit.cshtml" />
+    <Content Include="Views\Residentials\Index.cshtml" />
+    <Content Include="Views\Plots\Create.cshtml" />
+    <Content Include="Views\Plots\Delete.cshtml" />
+    <Content Include="Views\Plots\Details.cshtml" />
+    <Content Include="Views\Plots\Edit.cshtml" />
+    <Content Include="Views\Plots\Index.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\Agreements\Create.cshtml" />
+    <Content Include="Views\Agreements\Delete.cshtml" />
+    <Content Include="Views\Agreements\Details.cshtml" />
+    <Content Include="Views\Agreements\Edit.cshtml" />
+    <Content Include="Views\Agreements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +308,17 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911220754276_v1.resx">
+      <DependentUpon>201911220754276_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911220815564_v2.resx">
+      <DependentUpon>201911220815564_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911231226099_v3.resx">
+      <DependentUpon>201911231226099_v3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

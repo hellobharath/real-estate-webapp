@@ -1,0 +1,90 @@
+﻿@model RealEstate.Models.Residential
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Residential</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Property.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Property.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Built_Up_Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Built_Up_Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Built_Up_Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Built_Up_Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Land_Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Land_Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Land_Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Land_Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfBedrooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfBedrooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

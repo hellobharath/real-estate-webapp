@@ -1,0 +1,63 @@
+﻿@model IEnumerable<RealEstate.Models.Ad>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Property.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Property_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Posted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ad_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Property.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Property_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Posted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
