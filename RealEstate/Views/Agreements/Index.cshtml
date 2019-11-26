@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Payee.Email)
+            Payee's Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Payer.Email)
+            Payer's Email
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Property.Category)
@@ -71,9 +71,7 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
         </td>
     </tr>
 }

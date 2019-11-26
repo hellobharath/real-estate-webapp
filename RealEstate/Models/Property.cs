@@ -34,11 +34,9 @@ namespace RealEstate.Models
         [StringLength(50)]
         public string Status { get; set; }
 
+        [Required]
+        [Display(Name ="Image")]
         public byte[] image1 { get; set; }
-
-        public byte[] image2 { get; set; }
-
-        public byte[] image3 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ad> Ads { get; set; }

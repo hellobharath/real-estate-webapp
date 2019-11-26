@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RealEstate.Models;
 
 namespace RealEstate.Controllers
@@ -17,8 +19,10 @@ namespace RealEstate.Controllers
         // GET: Agreements
         public ActionResult Index()
         {
-            var agreements = db.Agreements;
-            return View(agreements.ToList());
+            var user = User.Identity.GetUserId();
+            var agreements = db.Agreements.Where(x => x.Payee_Id == user).ToList();
+            agreements.AddRange(db.Agreements.Where(x => x.Payer_Id == user).ToList());
+            return View(agreements);
         }
 
         // GET: Agreements/Details/5
@@ -35,13 +39,48 @@ namespace RealEstate.Controllers
             }
             return View(agreement);
         }
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "Accept")]
+        public ActionResult Accept(Agreement agreement)
+        {
+            if (ModelState.IsValid)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var result = db.Agreements.SingleOrDefault(b => b.Id == agreement.Id);
+                    if (result != null)
+                    {
+                        result.Status = "Accepted";
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
 
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "Reject")]
+        public ActionResult Reject(Agreement agreement)
+        {
+            if (ModelState.IsValid)
+            {
+                using(ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    var result = db.Agreements.SingleOrDefault(b => b.Id == agreement.Id);
+                    if (result != null)
+                    {
+                        result.Status = "Rejected";
+                        db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
         // GET: Agreements/Create
         public ActionResult Create()
         {
-            ViewBag.Payee_Id = new SelectList(db.Users, "Id", "Email");
-            ViewBag.Payer_Id = new SelectList(db.Users, "Id", "Email");
-            ViewBag.Property_Id = new SelectList(db.Properties, "Id", "Category");
             return View();
         }
 
@@ -54,9 +93,14 @@ namespace RealEstate.Controllers
         {
             if (ModelState.IsValid)
             {
+                agreement.Payee_Id = TempData["payeeID"].ToString();
+                agreement.Payer_Id = TempData["payerID"].ToString();
+                agreement.Property_Id = TempData["propertyID"].ToString();
+                agreement.Type = TempData["type"].ToString();
+                agreement.Status = "pending";
                 db.Agreements.Add(agreement);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new { id = agreement.Id });
             }
 
             ViewBag.Payee_Id = new SelectList(db.Users, "Id", "Email", agreement.Payee_Id);

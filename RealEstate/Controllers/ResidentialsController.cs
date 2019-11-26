@@ -130,18 +130,17 @@ namespace RealEstate.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResAd(Residential residential)
+        public ActionResult ResAd(ResidentialViewModel r)
         {
             if (ModelState.IsValid)
             {
-                residential.Id = TempData["Propid"].ToString();
-                db.Residentials.Add(residential);
+                r.Residential.Id = TempData["Propid"].ToString();
+                db.Residentials.Add(r.Residential);
+                db.Ads.Where(x => x.Property_Id == r.Residential.Id).FirstOrDefault().Price = r.price;
                 db.SaveChanges();
                 return RedirectToAction("Details", "Ads", new { Id = TempData["AdId"].ToString() });
             }
-
-            ViewBag.Id = new SelectList(db.Properties, "Id", "Category", residential.Id);
-            return View(residential);
+            return View(r);
         }
 
 

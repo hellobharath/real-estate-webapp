@@ -9,7 +9,7 @@ namespace RealEstate.Models
     [Table("Agreement")]
     public partial class Agreement
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(50)]

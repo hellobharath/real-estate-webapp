@@ -12,7 +12,6 @@ namespace RealEstate.Models
     public class ApplicationUser : IdentityUser
     {
         
-        public virtual ICollection<Contact> Contacts { get; set; }
         public virtual ICollection<Ad> Ads { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
 
@@ -38,7 +37,6 @@ namespace RealEstate.Models
         }
         public virtual DbSet<Ad> Ads { get; set; }
         public virtual DbSet<Agreement> Agreements { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Plot> Plots { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Residential> Residentials { get; set; }

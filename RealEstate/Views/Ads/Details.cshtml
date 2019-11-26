@@ -1,4 +1,5 @@
-﻿@model RealEstate.Models.AdViewModel
+﻿@using Microsoft.AspNet.Identity
+@model RealEstate.Models.AdViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,17 +10,16 @@
 <div>
     <h4>Ad</h4>
     <hr />
-    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Property.image1)" width="80" height="80" />
+    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Property.image1)" width="80%" height="80%" />
+
     <dl class="dl-horizontal">
-        
+
         <dt>
-            @Html.DisplayNameFor(model => model.Ad.ApplicationUser.Email)
+            @Html.DisplayNameFor(model => model.Ad.PropertyDesc)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Ad.ApplicationUser.Email)
+            @Html.DisplayFor(model => model.Ad.PropertyDesc)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Property.Category)
         </dt>
@@ -52,5 +52,65 @@
             @Html.DisplayFor(model => model.Ad.Price)
         </dd>
 
+        @if (Model.Property.Category == "Residential")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Residential.NoOfBedrooms)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Residential.NoOfBedrooms)
+            </dd>
+
+            <dt>
+                Dimensions
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Residential.Land_Length)
+                x
+                @Html.DisplayFor(model => model.Residential.Land_Width)
+            </dd>
+
+            <dt>
+                Built up dimensions
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Residential.Built_Up_Length)
+                x
+                @Html.DisplayFor(model => model.Residential.Built_Up_Width)
+            </dd>
+        }
+        else
+        {
+            <dt>
+                Dimensions
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Plot.Length)
+                x
+                @Html.DisplayFor(model => model.Plot.Width)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Plot.Price_Per_Sqft)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Plot.Price_Per_Sqft)
+            </dd>
+        }
+
     </dl>
+    <b>Contact Details</b>
+    <dl class="dl-horizontal">
+
+        <dt>@Html.DisplayNameFor(model => model.Property.ApplicationUser.UserName)</dt>
+        <dd>@Html.DisplayFor(model => model.Property.ApplicationUser.UserName)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Property.ApplicationUser.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Property.ApplicationUser.Email)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Property.ApplicationUser.PhoneNumber)</dt>
+        <dd>@Html.DisplayFor(model => model.Property.ApplicationUser.PhoneNumber)</dd>
+    </dl>
+    @if (HttpContext.Current.User.Identity.GetUserId() != Model.Property.Owner_Id)
+    {
+        @Html.ActionLink("Propose Agreement", "Create", "Agreements", null, new { @class = "btn btn-default" })
+    }
 </div>

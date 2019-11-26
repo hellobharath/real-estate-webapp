@@ -1,4 +1,4 @@
-﻿@model RealEstate.Models.Residential
+﻿@model RealEstate.Models.ResidentialViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -32,49 +32,57 @@
         }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Type, listItems, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.Residential.Type, listItems, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Built_Up_Length, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.Built_Up_Length, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Built_Up_Length, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Built_Up_Length, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Residential.Built_Up_Length, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Residential.Built_Up_Length, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Built_Up_Width, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.Built_Up_Width, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Built_Up_Width, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Built_Up_Width, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Residential.Built_Up_Width, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Residential.Built_Up_Width, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Land_Length, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.Land_Length, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Land_Length, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Land_Length, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Residential.Land_Length, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Residential.Land_Length, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Land_Width, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.Land_Width, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Land_Width, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Land_Width, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Residential.Land_Width, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Residential.Land_Width, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NoOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Residential.NoOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NoOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NoOfBedrooms, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Residential.NoOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Residential.NoOfBedrooms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -8,10 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using RealEstate.Models;
 using Microsoft.AspNet.Identity;
-using System.IO;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 
 namespace RealEstate.Controllers
 {
@@ -23,9 +18,13 @@ namespace RealEstate.Controllers
         public ActionResult Index(string Category,string search)
         {
             var ads = db.Ads;
-            return View(ads.Where(x => x.Property.Category == Category && (x.Property.Location == search || x.Property.City == search)).ToList());
+            return View(ads.Where(x => x.Property.Category == Category && (x.Property.Location == search || x.Property.City == search) && x.Status == "Available").ToList());
         }
-
+        public ActionResult PostedAds()
+        {
+            var user = User.Identity.GetUserId();
+            return View(db.Ads.Where(x => x.Owner_Id == user));
+        }
         // GET: Ads/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,13 +34,18 @@ namespace RealEstate.Controllers
             }
             Ad ad = db.Ads.Find(id);
             Property property = db.Properties.Find(ad.Property_Id);
-            Plot plot = null;
-            Residential residential = null;
-            if (property.Category == "Residential")
-                plot = db.Plots.Find(ad.Property_Id);
-            else
-                residential = db.Residentials.Find(ad.Property_Id);
+            Plot plot;
+            Residential residential;
+            plot = db.Plots.Find(ad.Property_Id);
+            residential = db.Residentials.Find(ad.Property_Id);
             AdViewModel a = new AdViewModel(ad, property, plot, residential);
+            if(ModelState.IsValid)
+            {
+                TempData["payeeID"] = a.Property.Owner_Id;
+                TempData["payerID"] = User.Identity.GetUserId();
+                TempData["type"] = a.Ad.Ad_Type;
+                TempData["propertyID"] = a.Property.Id;
+            }
             if (ad == null)
             {
                 return HttpNotFound();
@@ -154,10 +158,11 @@ namespace RealEstate.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 adView.Property.image1 = new byte[Image.ContentLength];
                 Image.InputStream.Read(adView.Property.image1, 0, Image.ContentLength);
                 adView.Property.Owner_Id = User.Identity.GetUserId();
-                adView.Property.Status = "Unsold";
+                adView.Property.Status = "Available";
                 adView.Property.Id = Guid.NewGuid().ToString();
                 TempData["Propid"] = adView.Property.Id;
                 db.Properties.Add(adView.Property);
@@ -168,9 +173,12 @@ namespace RealEstate.Controllers
                 db.SaveChanges();
                 TempData["AdId"] = adView.Ad.Id;
 
+
+
                 if (adView.Property.Category == "Residential")
-                    return RedirectToAction("ResAd","Residentials");
+                    return RedirectToAction("ResAd", "Residentials");
                 return RedirectToAction("PlotAd", "Plots");
+
             }
             return View(adView);
         }

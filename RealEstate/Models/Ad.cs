@@ -14,6 +14,8 @@ namespace RealEstate.Models
 
         public string Property_Id { get; set; }
 
+        public string Status { get; set; }
+
         [StringLength(128)]
         public string Owner_Id { get; set; }
 

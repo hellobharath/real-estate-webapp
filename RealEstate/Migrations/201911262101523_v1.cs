@@ -13,8 +13,9 @@ namespace RealEstate.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Property_Id = c.String(maxLength: 128),
+                        Status = c.String(),
                         Owner_Id = c.String(maxLength: 128),
-                        Property_Type = c.String(maxLength: 50),
+                        PropertyDesc = c.String(maxLength: 200),
                         Date_Posted = c.DateTime(storeType: "smalldatetime"),
                         Ad_Type = c.String(maxLength: 50),
                         Price = c.Int(),
@@ -59,22 +60,6 @@ namespace RealEstate.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.Contact",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Phno = c.Int(),
-                        Address = c.String(maxLength: 50),
-                        Pin = c.Int(),
-                        City = c.String(maxLength: 50),
-                        State = c.String(maxLength: 50),
-                        Email = c.String(maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Id)
-                .Index(t => t.Id);
-            
-            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
@@ -90,7 +75,7 @@ namespace RealEstate.Migrations
                 "dbo.Agreement",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Type = c.String(maxLength: 50),
                         Agreement_Terms = c.String(),
                         Token_Advance = c.Int(),
@@ -119,9 +104,7 @@ namespace RealEstate.Migrations
                         City = c.String(maxLength: 50),
                         Owner_Id = c.String(maxLength: 128),
                         Status = c.String(maxLength: 50),
-                        image1 = c.Binary(),
-                        image2 = c.Binary(),
-                        image3 = c.Binary(),
+                        image1 = c.Binary(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Owner_Id)
@@ -134,7 +117,6 @@ namespace RealEstate.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Length = c.Int(),
                         Width = c.Int(),
-                        Location = c.String(maxLength: 50),
                         Price_Per_Sqft = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -151,9 +133,7 @@ namespace RealEstate.Migrations
                         Built_Up_Width = c.Int(),
                         Land_Length = c.Int(),
                         Land_Width = c.Int(),
-                        Location = c.String(maxLength: 50),
                         NoOfBedrooms = c.Int(),
-                        Price = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Property", t => t.Id)
@@ -196,7 +176,6 @@ namespace RealEstate.Migrations
             DropForeignKey("dbo.Agreement", "Property_Id", "dbo.Property");
             DropForeignKey("dbo.Ad", "Property_Id", "dbo.Property");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Contact", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Ad", "Owner_Id", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -209,7 +188,6 @@ namespace RealEstate.Migrations
             DropIndex("dbo.Agreement", new[] { "Payee_Id" });
             DropIndex("dbo.Agreement", new[] { "Payer_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
-            DropIndex("dbo.Contact", new[] { "Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Ad", new[] { "Owner_Id" });
@@ -221,7 +199,6 @@ namespace RealEstate.Migrations
             DropTable("dbo.Property");
             DropTable("dbo.Agreement");
             DropTable("dbo.AspNetUserLogins");
-            DropTable("dbo.Contact");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Ad");
