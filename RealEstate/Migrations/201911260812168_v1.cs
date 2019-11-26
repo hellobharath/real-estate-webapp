@@ -12,7 +12,7 @@ namespace RealEstate.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Property_Id = c.Int(),
+                        Property_Id = c.String(maxLength: 128),
                         Owner_Id = c.String(maxLength: 128),
                         Property_Type = c.String(maxLength: 50),
                         Date_Posted = c.DateTime(storeType: "smalldatetime"),
@@ -99,10 +99,10 @@ namespace RealEstate.Migrations
                         Payer_Id = c.String(maxLength: 128),
                         Payee_Id = c.String(maxLength: 128),
                         Status = c.String(maxLength: 50),
-                        Property_Id = c.Int(nullable: false),
+                        Property_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Property", t => t.Property_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Property", t => t.Property_Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Payee_Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Payer_Id)
                 .Index(t => t.Payer_Id)
@@ -113,7 +113,7 @@ namespace RealEstate.Migrations
                 "dbo.Property",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Category = c.String(maxLength: 50),
                         Location = c.String(maxLength: 50),
                         City = c.String(maxLength: 50),
@@ -131,7 +131,7 @@ namespace RealEstate.Migrations
                 "dbo.Plot",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Length = c.Int(),
                         Width = c.Int(),
                         Location = c.String(maxLength: 50),
@@ -145,7 +145,7 @@ namespace RealEstate.Migrations
                 "dbo.Residential",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Type = c.String(maxLength: 50),
                         Built_Up_Length = c.Int(),
                         Built_Up_Width = c.Int(),

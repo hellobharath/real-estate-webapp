@@ -10,14 +10,11 @@ namespace RealEstate.Models
     public partial class Plot
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public int? Length { get; set; }
 
         public int? Width { get; set; }
-
-        [StringLength(50)]
-        public string Location { get; set; }
 
         public int? Price_Per_Sqft { get; set; }
 

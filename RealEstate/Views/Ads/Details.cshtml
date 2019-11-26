@@ -1,4 +1,4 @@
-﻿@model RealEstate.Models.Ad
+﻿@model RealEstate.Models.AdViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,13 +9,15 @@
 <div>
     <h4>Ad</h4>
     <hr />
+    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Property.image1)" width="80" height="80" />
     <dl class="dl-horizontal">
+        
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+            @Html.DisplayNameFor(model => model.Ad.ApplicationUser.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.Email)
+            @Html.DisplayFor(model => model.Ad.ApplicationUser.Email)
         </dd>
 
         <dt>
@@ -27,40 +29,28 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Property_Type)
+            @Html.DisplayNameFor(model => model.Ad.Date_Posted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Property_Type)
+            @Html.DisplayFor(model => model.Ad.Date_Posted)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date_Posted)
+            @Html.DisplayNameFor(model => model.Ad.Ad_Type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Date_Posted)
+            @Html.DisplayFor(model => model.Ad.Ad_Type)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ad_Type)
+            @Html.DisplayNameFor(model => model.Ad.Price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Ad_Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Ad.Price)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

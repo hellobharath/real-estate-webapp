@@ -119,6 +119,31 @@ namespace RealEstate.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult ResAd()
+        {
+            ViewBag.Id = new SelectList(db.Properties, "Id", "Category");
+            return View();
+        }
+
+        // POST: Residentials/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResAd(Residential residential)
+        {
+            if (ModelState.IsValid)
+            {
+                residential.Id = TempData["Propid"].ToString();
+                db.Residentials.Add(residential);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Ads", new { Id = TempData["AdId"].ToString() });
+            }
+
+            ViewBag.Id = new SelectList(db.Properties, "Id", "Category", residential.Id);
+            return View(residential);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

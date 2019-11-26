@@ -5,9 +5,31 @@
 }
 
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @using (@Html.BeginForm("Index", "Ads", FormMethod.Get))
+    {
+        
+        List<SelectListItem> listItems= new List<SelectListItem>();
+        listItems.Add(new SelectListItem
+        {
+            Text = "Residential",
+            Value = "Residential",
+            Selected = true
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Land",
+            Value = "Plot"
+        });
+
+         @Html.DropDownList("Category",listItems,new { @class = "form-control" })
+        <br />
+         <span>
+             @Html.Label("Search location")
+             @Html.TextBox("search","",new { @class = "form-control" }) 
+             <input type="submit" value="Go" class="form-control"/>
+         </span>   
+    }
 </p>
 <table class="table">
     <tr>
@@ -16,9 +38,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Property.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Property_Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date_Posted)
@@ -41,9 +60,6 @@
             @Html.DisplayFor(modelItem => item.Property.Category)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Property_Type)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Date_Posted)
         </td>
         <td>
@@ -53,9 +69,7 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
         </td>
     </tr>
 }

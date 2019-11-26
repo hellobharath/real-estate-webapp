@@ -109,6 +109,29 @@ namespace RealEstate.Controllers
             return View(plot);
         }
 
+        public ActionResult PlotAd()
+        {
+            return View();
+        }
+
+        // POST: Plots/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PlotAd(Plot plot)
+        {
+            if (ModelState.IsValid)
+            {
+                plot.Id = TempData["Propid"].ToString();
+                db.Plots.Add(plot);
+                db.SaveChanges();
+                return RedirectToAction("Details","Ads",new { Id = TempData["AdId"].ToString() });
+            }
+
+            return View(plot);
+        }
+
         // POST: Plots/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

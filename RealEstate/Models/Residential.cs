@@ -10,7 +10,7 @@ namespace RealEstate.Models
     public partial class Residential
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [StringLength(50)]
         public string Type { get; set; }
@@ -23,12 +23,7 @@ namespace RealEstate.Models
 
         public int? Land_Width { get; set; }
 
-        [StringLength(50)]
-        public string Location { get; set; }
-
         public int? NoOfBedrooms { get; set; }
-
-        public int? Price { get; set; }
 
         public virtual Property Property { get; set; }
     }

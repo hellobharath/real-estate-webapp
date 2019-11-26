@@ -15,8 +15,9 @@ namespace RealEstate.Models
             Ads = new HashSet<Ad>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [StringLength(128)]
+        public string Id { get; set; }
 
         [StringLength(50)]
         public string Category { get; set; }

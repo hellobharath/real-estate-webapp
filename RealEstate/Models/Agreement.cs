@@ -32,7 +32,7 @@ namespace RealEstate.Models
         [StringLength(50)]
         public string Status { get; set; }
 
-        public int Property_Id { get; set; }
+        public string Property_Id { get; set; }
 
         [ForeignKey("Property_Id")]
         public virtual Property Property { get; set; }

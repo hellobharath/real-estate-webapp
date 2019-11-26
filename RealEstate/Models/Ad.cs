@@ -12,13 +12,13 @@ namespace RealEstate.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int? Property_Id { get; set; }
+        public string Property_Id { get; set; }
 
         [StringLength(128)]
         public string Owner_Id { get; set; }
 
-        [StringLength(50)]
-        public string Property_Type { get; set; }
+        [StringLength(200)]
+        public string PropertyDesc { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? Date_Posted { get; set; }
@@ -28,6 +28,7 @@ namespace RealEstate.Models
 
         public int? Price { get; set; }
 
+        [ForeignKey("Property_Id")]
         public virtual Property Property { get; set; }
 
         [ForeignKey("Owner_Id")]
