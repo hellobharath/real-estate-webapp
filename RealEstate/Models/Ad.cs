@@ -20,12 +20,15 @@ namespace RealEstate.Models
         public string Owner_Id { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Property Description")]
+        [Required]
         public string PropertyDesc { get; set; }
 
         [Column(TypeName = "smalldatetime")]
         public DateTime? Date_Posted { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Purpose of Ad")]
         public string Ad_Type { get; set; }
 
         public int? Price { get; set; }
