@@ -20,8 +20,7 @@ namespace RealEstate.Controllers
         public ActionResult Index()
         {
             var user = User.Identity.GetUserId();
-            var agreements = db.Agreements.Where(x => x.Payee_Id == user).ToList();
-            agreements.AddRange(db.Agreements.Where(x => x.Payer_Id == user).ToList());
+            var agreements = db.Agreements.Where(x => x.Payee_Id == user || x.Payer_Id == user).ToList();
             return View(agreements);
         }
 
@@ -121,9 +120,6 @@ namespace RealEstate.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Payee_Id = new SelectList(db.Users, "Id", "Email", agreement.Payee_Id);
-            ViewBag.Payer_Id = new SelectList(db.Users, "Id", "Email", agreement.Payer_Id);
-            ViewBag.Property_Id = new SelectList(db.Properties, "Id", "Category", agreement.Property_Id);
             return View(agreement);
         }
 
@@ -132,7 +128,7 @@ namespace RealEstate.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Agreement_Terms,Token_Advance,Total_Amt,Agreement_Duration,Payer_Id,Payee_Id,Status,Property_Id")] Agreement agreement)
+        public ActionResult Edit(Agreement agreement)
         {
             if (ModelState.IsValid)
             {
@@ -140,9 +136,6 @@ namespace RealEstate.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Payee_Id = new SelectList(db.Users, "Id", "Email", agreement.Payee_Id);
-            ViewBag.Payer_Id = new SelectList(db.Users, "Id", "Email", agreement.Payer_Id);
-            ViewBag.Property_Id = new SelectList(db.Properties, "Id", "Category", agreement.Property_Id);
             return View(agreement);
         }
 
@@ -171,6 +164,28 @@ namespace RealEstate.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Notify()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Notify(Agreement agreement)
+        {
+            if (ModelState.IsValid)
+            {
+                agreement.Payer_Id = TempData["payerID"].ToString();
+                agreement.Payee_Id = TempData["payeeID"].ToString();
+                agreement.Type = TempData["type"].ToString();
+                agreement.Property_Id = TempData["propertyID"].ToString();
+                agreement.Status = "Pending";
+                db.Agreements.Add(agreement);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

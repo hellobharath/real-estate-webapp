@@ -18,7 +18,7 @@ namespace RealEstate.Migrations
                         PropertyDesc = c.String(nullable: false, maxLength: 200),
                         Date_Posted = c.DateTime(storeType: "smalldatetime"),
                         Ad_Type = c.String(maxLength: 50),
-                        Price = c.Int(nullable: false),
+                        Price = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Owner_Id)
@@ -77,10 +77,10 @@ namespace RealEstate.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Type = c.String(maxLength: 50),
-                        Agreement_Terms = c.String(nullable: false),
-                        Token_Advance = c.Int(nullable: false),
-                        Total_Amt = c.Int(nullable: false),
-                        Agreement_Duration = c.Int(nullable: false),
+                        Agreement_Terms = c.String(),
+                        Token_Advance = c.Int(),
+                        Total_Amt = c.Int(),
+                        Agreement_Duration = c.Int(),
                         Payer_Id = c.String(maxLength: 128),
                         Payee_Id = c.String(maxLength: 128),
                         Status = c.String(maxLength: 50),
@@ -103,6 +103,7 @@ namespace RealEstate.Migrations
                         Location = c.String(nullable: false, maxLength: 50),
                         City = c.String(nullable: false, maxLength: 50),
                         Owner_Id = c.String(maxLength: 128),
+                        Status = c.String(maxLength: 50),
                         image1 = c.Binary(),
                     })
                 .PrimaryKey(t => t.Id)

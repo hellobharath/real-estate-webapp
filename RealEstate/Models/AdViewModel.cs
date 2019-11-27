@@ -13,6 +13,7 @@ namespace RealEstate.Models
         public Property Property { get; set; }
         public Plot Plot { get; set; }
         public Residential Residential { get; set; }
+        public Agreement Agreement { get; set; }
 
         public AdViewModel()
         {

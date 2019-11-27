@@ -25,7 +25,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.Identity.IsAuthenticated == true)
                     {
-                        <li>@Html.ActionLink("View Properties", "Index", "Ads")</li>
+                        <li>@Html.ActionLink("Search", "Index", "Ads")</li>
                         <li>@Html.ActionLink("Post new Ad", "PostAd", "Ads")</li>
                         <li>@Html.ActionLink("View Posted Ads", "PostedAds", "Ads")</li>
                         

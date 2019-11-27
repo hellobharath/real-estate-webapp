@@ -18,7 +18,7 @@ namespace RealEstate.Controllers
         public ActionResult Index(string Category,string search)
         {
             var ads = db.Ads;
-            return View(ads.Where(x => x.Property.Category == Category && (x.Property.Location == search || x.Property.City == search) && x.Status == "Available").ToList());
+            return View(ads.Where(x => x.Property.Category == Category && (x.Property.Location.ToLower() == search.ToLower() || x.Property.City.ToLower() == search.ToLower()) && x.Status == "Available").ToList());
         }
         public ActionResult PostedAds()
         {
@@ -115,6 +115,7 @@ namespace RealEstate.Controllers
             ViewBag.Property_Id = new SelectList(db.Properties, "Id", "Category", ad.Property_Id);
             return View(ad);
         }
+
 
         // GET: Ads/Delete/5
         public ActionResult Delete(int? id)

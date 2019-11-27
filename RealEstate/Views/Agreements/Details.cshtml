@@ -67,17 +67,9 @@
             @Html.DisplayFor(model => model.Agreement_Duration)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
     </dl>
 </div>
-@if (HttpContext.Current.User.Identity.GetUserId() == Model.Property.Owner_Id)
+@if (HttpContext.Current.User.Identity.GetUserId() != Model.Property.Owner_Id)
 {
     <form action="" method="post">
         <input type="submit" value="Accept" name="action:Accept" class="btn btn-default" />

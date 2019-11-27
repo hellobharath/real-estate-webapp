@@ -1,18 +1,15 @@
-﻿@model IEnumerable<RealEstate.Models.Agreement>
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<RealEstate.Models.Agreement>
 
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Agreements</h2>
+<br />
 <table class="table">
     <tr>
         <th>
-            Payee's Email
+            Owner's Email
         </th>
         <th>
             Payer's Email
@@ -22,18 +19,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Agreement_Terms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Token_Advance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Total_Amt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Agreement_Duration)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -56,22 +41,17 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Agreement_Terms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Token_Advance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Total_Amt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Agreement_Duration)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+            @if (User.Identity.GetUserId() == item.Payer_Id)
+            {
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            }
+            else if (User.Identity.GetUserId() == item.Payee_Id)
+            {
+                @Html.ActionLink("Details", "Edit", new { id = item.Id })
+            }
         </td>
     </tr>
 }
