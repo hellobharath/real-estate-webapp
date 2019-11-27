@@ -156,34 +156,43 @@ namespace RealEstate.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PostAd(AdViewModel adView,HttpPostedFileBase Image)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (ModelState.IsValid)
+                {
+                    adView.Property.image1 = new byte[Image.ContentLength];
+                    Image.InputStream.Read(adView.Property.image1, 0, Image.ContentLength);
+                    adView.Property.Owner_Id = User.Identity.GetUserId();
+                    adView.Property.Status = "Available";
+                    adView.Property.Id = Guid.NewGuid().ToString();
+                    TempData["Propid"] = adView.Property.Id;
+                    db.Properties.Add(adView.Property);
+                    adView.Ad.Owner_Id = User.Identity.GetUserId();
+                    adView.Ad.Date_Posted = DateTime.Now;
+                    adView.Ad.Property_Id = adView.Property.Id;
+                    db.Ads.Add(adView.Ad);
+                    db.SaveChanges();
+                    TempData["AdId"] = adView.Ad.Id;
 
-                adView.Property.image1 = new byte[Image.ContentLength];
-                Image.InputStream.Read(adView.Property.image1, 0, Image.ContentLength);
-                adView.Property.Owner_Id = User.Identity.GetUserId();
-                adView.Property.Status = "Available";
-                adView.Property.Id = Guid.NewGuid().ToString();
-                TempData["Propid"] = adView.Property.Id;
-                db.Properties.Add(adView.Property);
-                adView.Ad.Owner_Id = User.Identity.GetUserId();
-                adView.Ad.Date_Posted = DateTime.Now;
-                adView.Ad.Property_Id = adView.Property.Id;
-                db.Ads.Add(adView.Ad);
-                db.SaveChanges();
-                TempData["AdId"] = adView.Ad.Id;
 
 
+                    if (adView.Property.Category == "Residential")
+                        return RedirectToAction("ResAd", "Residentials");
+                    return RedirectToAction("PlotAd", "Plots");
 
-                if (adView.Property.Category == "Residential")
-                    return RedirectToAction("ResAd", "Residentials");
-                return RedirectToAction("PlotAd", "Plots");
-
+                }
+            }
+            catch(Exception e)
+            {
+                return RedirectToAction("ErrorPage", "Ads");
             }
             return View(adView);
         }
 
-
+        public ActionResult ErrorPage()
+        {
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

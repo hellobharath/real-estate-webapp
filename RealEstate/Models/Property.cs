@@ -34,7 +34,6 @@ namespace RealEstate.Models
         [StringLength(50)]
         public string Status { get; set; }
 
-        [Required]
         [Display(Name ="Image")]
         public byte[] image1 { get; set; }
 
