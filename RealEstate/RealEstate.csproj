@@ -203,6 +203,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cerulean.bootstrap.css" />
+    <Content Include="Content\cosmo.bootstrap.css" />
+    <Content Include="Content\cyborg.bootstrap.css" />
+    <Content Include="Content\darkly.bootstrap.css" />
+    <Content Include="Content\flatly.bootstrap.css" />
+    <Content Include="Content\journal.bootstrap.css" />
+    <Content Include="Content\lumen.bootstrap.css" />
+    <Content Include="Content\slate.bootstrap.css" />
+    <Content Include="Content\superhero.bootstrap.css" />
+    <Content Include="Content\united.bootstrap.css" />
+    <Content Include="Content\yeti.bootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

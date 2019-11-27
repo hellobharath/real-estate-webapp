@@ -163,7 +163,7 @@ namespace RealEstate.Controllers
                     adView.Property.image1 = new byte[Image.ContentLength];
                     Image.InputStream.Read(adView.Property.image1, 0, Image.ContentLength);
                     adView.Property.Owner_Id = User.Identity.GetUserId();
-                    adView.Property.Status = "Available";
+                    adView.Ad.Status = "Available";
                     adView.Property.Id = Guid.NewGuid().ToString();
                     TempData["Propid"] = adView.Property.Id;
                     db.Properties.Add(adView.Property);
