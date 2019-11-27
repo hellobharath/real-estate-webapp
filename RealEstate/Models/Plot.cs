@@ -12,10 +12,16 @@ namespace RealEstate.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
+        [Display(Name = "Property Length")]
+        [Required]
         public int? Length { get; set; }
 
+        [Display(Name = "Property Width")]
+        [Required]
         public int? Width { get; set; }
 
+        [Display(Name = "Price per sqft.")]
+        [Required]
         public int? Price_Per_Sqft { get; set; }
 
         public virtual Property Property { get; set; }

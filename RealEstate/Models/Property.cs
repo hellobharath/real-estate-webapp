@@ -23,9 +23,12 @@ namespace RealEstate.Models
         public string Category { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Location/Area")]
+        [Required]
         public string Location { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string City { get; set; }
         
         [StringLength(128)]

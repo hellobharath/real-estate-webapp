@@ -31,6 +31,7 @@ namespace RealEstate.Models
         [Display(Name = "Purpose of Ad")]
         public string Ad_Type { get; set; }
 
+        [Required]
         public int? Price { get; set; }
 
         [ForeignKey("Property_Id")]

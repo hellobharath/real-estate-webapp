@@ -15,12 +15,20 @@ namespace RealEstate.Models
         [StringLength(50)]
         public string Type { get; set; }
 
+        [Display(Name = "Terms of Agreement")]
+        [Required]
         public string Agreement_Terms { get; set; }
 
+        [Display(Name = "Advance Amount")]
+        [Required]
         public int? Token_Advance { get; set; }
 
+        [Display(Name = "Total Amount")]
+        [Required]
         public int? Total_Amt { get; set; }
 
+        [Display(Name = "Duration of Agreement")]
+        [Required]
         public int? Agreement_Duration { get; set; }
 
         [StringLength(128)]

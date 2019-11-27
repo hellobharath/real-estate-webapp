@@ -13,7 +13,7 @@ namespace RealEstate.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201911270907060_v1"; }
+            get { return "201911271107160_v1"; }
         }
         
         string IMigrationMetadata.Source
