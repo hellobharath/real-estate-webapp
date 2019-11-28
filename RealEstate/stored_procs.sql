@@ -1,11 +1,11 @@
 ﻿/*Trigger to update availability of properties*/
 USE RealEstateDB
 GO
-CREATE TRIGGER UpdateAvailability ON [dbo].[Agreement]
+CREATE TRIGGER [dbo].[UpdateAvailability] ON [dbo].[Agreement]
 AFTER UPDATE
 AS
 BEGIN
-	DECLARE @id int;
+	DECLARE @id nvarchar(128);
 	DECLARE @status nvarchar(50);
 	SELECT @id = Property_Id FROM inserted i;
 	SELECT @status = i.Status FROM inserted i;

@@ -109,7 +109,7 @@
         <dt>@Html.DisplayNameFor(model => model.Property.ApplicationUser.PhoneNumber)</dt>
         <dd>@Html.DisplayFor(model => model.Property.ApplicationUser.PhoneNumber)</dd>
     </dl>
-    @if (HttpContext.Current.User.Identity.GetUserId() != Model.Property.Owner_Id && (Model.Ad.Ad_Type == "Rent" || Model.Ad.Ad_Type == "Lease"))
+    @if (HttpContext.Current.User.Identity.GetUserId() != Model.Property.Owner_Id )
     {
         @*Html.ActionLink("Propose Agreement", "Create", "Agreements", null, new { @class = "btn btn-default" })*@
         @Html.ActionLink("Notify Owner", "Notify", "Agreements", null, new { @class = "btn btn-default" })
